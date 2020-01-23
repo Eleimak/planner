@@ -62,6 +62,7 @@ export class TestData {
       category: TestData.categories[1],
       date: new Date('2019-08-17')
     },
+
     {
       id: 5,
       name: 'Найти и выучить учебник по квантовой физике',
@@ -69,6 +70,7 @@ export class TestData {
       completed: false,
       category: TestData.categories[2]
     },
+
     {
       id: 6,
       name: 'Сходить на семинар по Котлину',
@@ -85,6 +87,7 @@ export class TestData {
       completed: false,
       category: TestData.categories[3]
     },
+
     {
       id: 8,
       name: 'Приготовить ужин для всей семьи (семга с картошкой)',
@@ -92,6 +95,7 @@ export class TestData {
       completed: false,
       category: TestData.categories[5]
     },
+
     {
       id: 9,
       name: 'Подтянуться 10 раз',
@@ -100,6 +104,7 @@ export class TestData {
       category: TestData.categories[4],
       date: new Date('2019-03-12')
     },
+
     {
       id: 10,
       name: 'Пробежать 100 м',
@@ -108,11 +113,13 @@ export class TestData {
       category: TestData.categories[4]
     },
 
+
     {
       id: 11,
       name: 'Организовать детский праздник ',
       priority: TestData.priorities[2],
-      completed: false
+      completed: false,
+      category: TestData.categories[3]
     },
 
     {
@@ -122,6 +129,7 @@ export class TestData {
       completed: false,
       category: TestData.categories[2]
     },
+
     {
       id: 13,
       name: 'Купить продукты на неделю',
@@ -143,9 +151,9 @@ export class TestData {
       id: 15,
       name: 'Сдать экзамен по Java Oracle',
       priority: TestData.priorities[2],
-      completed: true
+      completed: true,
+      category: TestData.categories[10]
     },
-
 
     {
       id: 16,
@@ -170,7 +178,6 @@ export class TestData {
       completed: false,
       category: TestData.categories[8],
       date: new Date('2020-12-11')
-
     },
 
     {
@@ -180,7 +187,6 @@ export class TestData {
       completed: false,
       category: TestData.categories[7],
       date: new Date('2019-10-11')
-
     },
 
     {
@@ -190,7 +196,6 @@ export class TestData {
       completed: false,
       category: TestData.categories[4],
       date: new Date('2019-03-17')
-
     }
 
   ];
