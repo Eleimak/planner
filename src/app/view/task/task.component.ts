@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { Task } from '../../model/task';
 import { DataHandlerService } from '../../service/data-handler.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
@@ -8,7 +8,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit, AfterViewInit {
   tasks: Task[];
   // поля для таблицы (те, что отображают данные из задачи - должны совпадать с названиями переменных класса)
   displayedColumns: string[] = ['id', 'name', 'category', 'priority', 'completed', 'date'];
@@ -49,6 +49,28 @@ export class TaskComponent implements OnInit {
 
   private refreshTable() {
     this.dataSource.data = this.tasks; // обновить источник данных (т.к. данные массива tasks обновились)
+    this.addTableObjects();
+      // когда получаем новые данные..
+      // чтобы можно было сортировать по столбцам "категория" и "приоритет", т.к. там не примитивные типы, а объекты
+      // @ts-ignore - показывает ошибку для типа даты, но так работает, т.к. можно возвращать любой тип
+    this.dataSource.sortingDataAccessor = (task, colName) => {
+        // по каким полям выполнять сортировку для каждого столбца
+        switch (colName) {
+          case 'priority': {
+            return task.priority ? task.priority.id : null;
+          }
+          case 'category': {
+            return task.category ? task.category.name : null;
+          }
+          case 'date': {
+            return task.date ? task.date : null;
+          }
+
+          case 'name': {
+            return task.name;
+          }
+        }
+      };
   }
 
   private addTableObjects() {

@@ -7,6 +7,26 @@ table {
   width: 100%;
 }
 
+.tableID{
+  width: 4%;
+}
+
+.tableName{
+  width: 59%;
+}
+
+.tableCategory, .tablePriority{
+  width: 10%;
+}
+
+.tableCompleted{
+  width: 7%;
+}
+
+.tableDate{
+  width: 20%;
+}
+
 .form-check-input{
   position: static;
 }

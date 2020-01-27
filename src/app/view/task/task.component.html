@@ -56,22 +56,22 @@
     <table [dataSource]="dataSource" mat-table matSort>
       <ng-container matColumnDef="id">
         <th *matHeaderCellDef mat-header-cell>ID</th>
-        <td *matCellDef="let index = index;" mat-cell>{{index + 1}}</td>
+        <td class="tableID" *matCellDef="let index = index;" mat-cell>{{index + 1}}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Название</th>
-        <td *matCellDef="let task" [class.completed]="task.completed" mat-cell>{{task.name}}</td>
+        <td class="tableName" *matCellDef="let task" [class.completed]="task.completed" mat-cell>{{task.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="category">
         <th *matHeaderCellDef mat-header-cell mat-sort-header> Категория</th>
-        <td *matCellDef="let task" mat-cell>{{task.category.name}}</td>
+        <td class="tableCategory" *matCellDef="let task" mat-cell>{{task.category.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="priority">
         <th *matHeaderCellDef mat-header-cell>Приоритет</th>
-        <td *matCellDef="let task"
+        <td class="tablePriority" *matCellDef="let task"
             [ngClass]="{'nopriority': task.priority == null}" [style.color]="task.priority.color" mat-cell>
           {{task.priority ? task.priority.name : "Без приоритета"}}
         </td>
@@ -79,7 +79,7 @@
 
       <ng-container matColumnDef="completed">
         <th *matHeaderCellDef mat-header-cell>Статус</th>
-        <td *matCellDef="let task" [ngClass]="{'completed': task.completed}" mat-cell>
+        <td class="tableCompleted" *matCellDef="let task" [ngClass]="{'completed': task.completed}" mat-cell>
           <div class="form-check">
             <label class="form-check-label">
               <input
@@ -98,7 +98,7 @@
 
       <ng-container matColumnDef="date">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Дата</th>
-        <td *matCellDef="let task" [ngClass]="{'nodat e': task.date == null}"mat-cell>
+        <td class="tableDate" *matCellDef="let task" [ngClass]="{'nodat e': task.date == null}"mat-cell>
           {{task.date | date: "short"}}
         </td>
       </ng-container>
@@ -107,6 +107,6 @@
       <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
 </div>
