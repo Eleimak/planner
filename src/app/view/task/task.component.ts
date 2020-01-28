@@ -25,7 +25,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     //  this.tasks = this.dataHandler.getTasks();
-    this.dataHandler.taskSubject.subscribe(tasks => this.tasks = tasks);
+    this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
     // датасорс обязательно нужно создавать для таблицы, в него присваивается любой источник (БД, массивы, JSON и пр.)
     this.dataSource = new MatTableDataSource();
     this.refreshTable();
@@ -35,13 +35,13 @@ export class TaskComponent implements OnInit, AfterViewInit {
     this.addTableObjects();
   }
 
-  applyFilter(filterValue: string) {
+  /*applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
+  }*/
 
   toggleTaskCompleted(task: Task) {
     task.completed = !task.completed;
