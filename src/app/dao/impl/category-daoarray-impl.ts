@@ -1,8 +1,8 @@
 import {CategoryDAO} from '../interface/category-dao';
-import {Category} from '../../model/category';
 import {Observable} from 'rxjs';
+import {Category} from '../../model/category';
 
-export class CategoryDAOArratImpl implements CategoryDAO {
+export class CategoryDAOArrayImpl implements CategoryDAO {
   add(T): Observable<Category> {
     return undefined;
   }
