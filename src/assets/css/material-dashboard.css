@@ -12,7 +12,7 @@
 =========================================================
 
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.*/
- 
+
 
 /*     brand Colors              */
 
@@ -10895,7 +10895,7 @@ fieldset[disabled] .form-group.is-focused .form-check .form-check-label {
 }
 
 .form-check .form-check-input:checked+.form-check-sign .check {
-  background: #9c27b0;
+  background: #07b026;
 }
 
 .form-check .form-check-input:checked+.form-check-sign .check:before {
@@ -14482,7 +14482,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
-.sidebar .caret {
+.sidebarsidebar .caret {
   display: inline-block;
   width: 0;
   height: 0;
@@ -14597,7 +14597,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav li .dropdown-menu a:hover,
 .sidebar .nav li .dropdown-menu a:focus,
 .sidebar .nav li.active>[data-toggle="collapse"] {
-  background-color: rgba(200, 200, 200, 0.2);
+  background: linear-gradient(50deg, #fb5546, #1dff31); /*background-color: rgba(200, 200, 200, 0.2);*/
   color: #3C4858;
   box-shadow: none;
 }
@@ -14773,8 +14773,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   color: #fff;
 }
 
-.sidebar[data-color="purple"] li.active>a {
-  background-color: #9c27b0;
+.sidebar[data-color="yellow"] li.active>a {
+  background-color: #ffd931;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 }
 
@@ -14884,8 +14884,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .main-panel>.content {
-  margin-top: 70px;
-  padding: 30px 15px;
+  /*margin-top: 70px;*/
+  padding: 0px 15px;
   min-height: calc(100vh - 123px);
 }
 
@@ -16805,7 +16805,7 @@ label {
 .card.bg-warning,
 .card.card-rotate.bg-warning .front,
 .card.card-rotate.bg-warning .back {
-  background: linear-gradient(60deg, #ffa726, #fb8c00);
+  background: linear-gradient(50deg, #fb5546, #1dff31);
 }
 
 .card .card-header-danger .card-icon,
@@ -16873,7 +16873,7 @@ label {
 .card[class*="bg-"] .card-title a,
 .card[class*="bg-"] .card-title,
 .card[class*="bg-"] .icon i {
-  color: #fff;
+  color: purple;
 }
 
 .card [class*="card-header-"] .icon i,

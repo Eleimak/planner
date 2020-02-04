@@ -19,10 +19,11 @@ export class TestData {
 
 
   static priorities: Priority[] = [
-    {id: 1, name: 'Низкий', color: '#e5e5e5'},
-    {id: 2, name: 'Средний', color: '#85D1B2'},
-    {id: 3, name: 'Высокий', color: '#F1828D'},
-    {id: 4, name: 'Очень срочно!!', color: '#F1128D'}
+    {id: 5, name: 'Без приоритета', color: '#e5e5e5'},
+    {id: 4, name: 'Низкий', color: '#000059'},
+    {id: 3, name: 'Средний', color: '#85D1B2'},
+    {id: 2, name: 'Высокий', color: '#F1828D'},
+    {id: 1, name: 'Очень срочно!!', color: '#F1128D'}
   ];
 
 
@@ -31,7 +32,7 @@ export class TestData {
     {
       id: 1,
       name: 'Залить бензин полный бак',
-      priority: TestData.priorities[2],
+      priority: TestData.priorities[4],
       completed: false,
       category: TestData.categories[9],
       date: new Date('2019-04-10')
@@ -125,7 +126,7 @@ export class TestData {
     {
       id: 12,
       name: 'Сходить на лекцию "Как научиться программировать на Пайтон"',
-      priority: TestData.priorities[1],
+      priority: TestData.priorities[4],
       completed: false,
       category: TestData.categories[2]
     },

@@ -1,18 +1,21 @@
-<div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+<!-- 14777 строка active background-color material-dashboard.css-->
+<div class="sidebar" data-color="yellow" data-background-color="purple">
   <!--
     Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
     Tip 2: you can also add an image using data-image tag
 -->
   <div class="logo">
-    <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+    <a (click)="showTasksByCategory(null)" class="simple-text logo-normal">
 <!--      Creative Tim-->
+      Planner
     </a>
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
+      <!-- 14600 строка цвет :hover background-color material-dashboard.css-->
       <li class="nav-item" *ngFor="let category of categories" (click)="showTasksByCategory(category)"
-          [class.active]="category === selected">
+        [class.active]="category === selectedCategory">
         <a class="nav-link">
           <i class="material-icons">{{category.icon}}</i>
           <p>{{category.name}}</p>

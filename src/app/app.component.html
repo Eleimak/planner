@@ -1,13 +1,13 @@
 <div class="wrapper ">
- <app-category></app-category>
+ <app-category (tellToSubscribers)="onSelectCategory($event)" [categories]="categories"></app-category>
   <div class="main-panel">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+   <!-- <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
       <div class="container-fluid">
         <div class="navbar-wrapper">
           <a class="navbar-brand" href="#pablo">Planner</a>
         </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+        &lt;!&ndash;<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon icon-bar"></span>
           <span class="navbar-toggler-icon icon-bar"></span>
@@ -63,16 +63,16 @@
               </div>
             </li>
           </ul>
-        </div>
+        </div>&ndash;&gt;
       </div>
     </nav>
-    <!-- End Navbar -->
+  -->  <!-- End Navbar -->
     <div class="content">
-      <app-task></app-task>
+      <app-task (updateTask)="onUpdateTask($event)" [tasks]="tasks"></app-task>
     </div>
     <footer class="footer">
       <div class="container-fluid">
-        <nav class="float-left">
+       <!-- <nav class="float-left">
           <ul>
             <li>
               <a href="https://www.creative-tim.com">
@@ -102,7 +102,7 @@
             document.write(new Date().getFullYear())
           </script>, made with <i class="material-icons">favorite</i> by
           <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-        </div>
+        </div>-->
       </div>
     </footer>
   </div>

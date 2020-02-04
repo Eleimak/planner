@@ -1,3 +1,11 @@
 .nav-link p {
   cursor: pointer;
 }
+
+.logo-normal{
+  cursor: pointer;
+}
+
+.material-icons{
+  background-color: purple;
+}

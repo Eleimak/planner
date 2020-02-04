@@ -13,7 +13,7 @@ export class CategoryDAOArrayImpl implements CategoryDAO {
   }
 
   get(id: number): Observable<Category> {
-    return undefined;
+    return ;
   }
 
   getAll(): Observable<Category[]> {

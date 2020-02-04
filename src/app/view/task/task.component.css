@@ -12,11 +12,12 @@ table {
 }
 
 .tableName{
-  width: 59%;
+  width: 55%;
+  cursor: pointer;
 }
 
 .tableCategory, .tablePriority{
-  width: 10%;
+  width: 12%;
 }
 
 .tableCompleted{
@@ -29,4 +30,9 @@ table {
 
 .form-check-input{
   position: static;
+}
+
+.completed{
+  text-decoration: line-through;
+  color: greenyellow;
 }

@@ -24,10 +24,12 @@ export class TaskDAOArrayImpl implements TaskDAO {
   }
 
   get(id: number): Observable<Task> {
-    return undefined;
+    return of(TestData.tasks.find(task => task.id === id));
   }
 
-
+  getTasksByCategory(category: Category): Observable<Category[]> {
+    return of(TestData.tasks.filter( task => task.category === category));
+  }
 
   getCompletedCountInCategory(category: Category): Observable<number> {
     return undefined;
@@ -45,8 +47,19 @@ export class TaskDAOArrayImpl implements TaskDAO {
     return undefined;
   }
 
+  // поиск задач по параметрам
+  // если значение null - параметр не нужно учитывать при поиске
   search(category: Category, searchText: string, status: boolean, priority: Priority): Observable<Task[]> {
-    return undefined;
+    return of(this.searchTodos(category, searchText, status, priority));
+
+  }
+
+  private searchTodos(category: Category, searchText: string, status: boolean, priority: Priority): Task[] {
+    let allTasks = TestData.tasks;
+    if (category != null) {
+      allTasks = allTasks.filter(todo => todo.category === category);
+    }
+    return allTasks; // отфильтрованный массив
   }
 
   update(T): Observable<Task> {
