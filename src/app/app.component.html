@@ -68,7 +68,7 @@
     </nav>
   -->  <!-- End Navbar -->
     <div class="content">
-      <app-task (updateTask)="onUpdateTask($event)" [tasks]="tasks"></app-task>
+      <app-task (updateTask)="openEditTaskDialog($event)" [tasks]="tasks"></app-task>
     </div>
     <footer class="footer">
       <div class="container-fluid">

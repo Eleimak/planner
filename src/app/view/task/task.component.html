@@ -13,7 +13,7 @@
 
       <ng-container matColumnDef="name">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Название</th>
-        <td class="tableName" *matCellDef="let task" [class.completed]="task.completed" (click)="onClickTask(task)" mat-cell>{{task.name}}</td>
+        <td class="tableName" *matCellDef="let task" [class.completed]="task.completed" (click)="openEditTaskDialog(task)" mat-cell>{{task.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="category">

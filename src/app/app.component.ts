@@ -40,7 +40,8 @@ export class AppComponent {
 
   }
 
-  onUpdateTask($event: Task) {
-    console.log($event);
+  openEditTaskDialog(task: Task) {
+
+    console.log(task);
   }
 }
