@@ -63,7 +63,10 @@ export class TaskDAOArrayImpl implements TaskDAO {
   }
 
   update(T): Observable<Task> {
-    return undefined;
+    const taskTmp = TestData.tasks.find(t => t.id === T.id); // обновляем по id
+    TestData.tasks.splice(TestData.tasks.indexOf(taskTmp), 1, T);
+    console.log(TestData.tasks);
+    return of(T);
   }
 
 

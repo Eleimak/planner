@@ -11,6 +11,7 @@ import {EditTaskDialogComponent} from "../../dialog/edit-task-dialog/edit-task-d
 })
 export class TaskComponent implements OnInit, AfterViewInit {
   private tasks: Task[];
+  private pages: number[]=[10, 5, 25, 50, 100];
 
   @Input('tasks')
   private set setTasks(tasks: Task[]) { // напрямую не присваиваем значения в переменную, только через @Input
@@ -62,18 +63,14 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
   // в зависимости от статуса задачи - вернуть цвет названия
   private getPriorityColor(task: Task) {
-
     // цвет завершенной задачи
     if (task.completed) {
       return '#F8F9FA'; // TODO вынести цвета в константы (magic strings, magic numbers)
     }
-
     if (task.priority && task.priority.color) {
       return task.priority.color;
     }
-
     return '#fff'; // TODO вынести цвета в константы (magic strings, magic numbers)
-
   }
 
 
@@ -83,7 +80,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
     this.dataSource.data = this.tasks; // обновить источник данных (т.к. данные массива tasks обновились)
     this.addTableObjects();
-
       // когда получаем новые данные..
       // чтобы можно было сортировать по столбцам "категория" и "приоритет", т.к. там не примитивные типы, а объекты
       // @ts-ignore - показывает ошибку для типа даты, но так работает, т.к. можно возвращать любой тип
@@ -99,7 +95,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
           case 'date': {
             return task.date ? task.date : null;
           }
-
           case 'name': {
             return task.name;
           }
@@ -113,11 +108,15 @@ export class TaskComponent implements OnInit, AfterViewInit {
   }
 
   openEditTaskDialog(task: Task) {
-
     // открытие диалогового окна
-    const dialogRef = this.dialog.open(EditTaskDialogComponent, {data: [task, 'Редактирование задачи'], autoFocus: false});
+    const dialogRef = this.dialog.open(EditTaskDialogComponent,
+      {data: [task, 'Редактирование задачи'], autoFocus: false});
     dialogRef.afterClosed().subscribe(result => {
       // обработка результатов
+      if(result as Task) { //если нажали ОК и есть результат
+        this.updateTask.emit(task);
+        return;
+      }
       });
   }
 }

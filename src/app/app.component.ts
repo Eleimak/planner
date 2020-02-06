@@ -22,12 +22,10 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
-    //this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
     this.onSelectCategory(null);
   }
 
   private onSelectCategory(category: Category) {
-    console.log("onSelectCategory");
     this.selectedCategory = category;
     this.dataHandler.searchTasks(
       this.selectedCategory,
@@ -41,7 +39,15 @@ export class AppComponent {
   }
 
   openEditTaskDialog(task: Task) {
-
-    console.log(task);
+    this.dataHandler.updateTask(task).subscribe(() => {
+      this.dataHandler.searchTasks(
+        this.selectedCategory,
+        null,
+        null,
+        null
+      ).subscribe(tasks => {
+        this.tasks = tasks;
+      });
+    });
   }
 }

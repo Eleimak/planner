@@ -6,8 +6,18 @@ import { CategoryComponent } from './view/category/category.component';
 import { DataHandlerService } from './service/data-handler.service';
 import { TaskComponent } from './view/task/task.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule, MatPaginatorModule, MatSortModule, MatTableModule, MatDialogModule} from '@angular/material';
+import { MatFormFieldModule,
+         MatPaginatorModule,
+         MatSortModule,
+         MatTableModule,
+         MatDialogModule,
+         MatInputModule,
+         MatButtonModule,
+         MatIconModule,
+         MatOptionModule,
+         MatSelectModule} from '@angular/material';
 import { EditTaskDialogComponent } from './dialog/edit-task-dialog/edit-task-dialog.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,6 +34,12 @@ import { EditTaskDialogComponent } from './dialog/edit-task-dialog/edit-task-dia
     MatPaginatorModule,
     MatFormFieldModule,
     MatDialogModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [DataHandlerService],
   entryComponents: [EditTaskDialogComponent],
