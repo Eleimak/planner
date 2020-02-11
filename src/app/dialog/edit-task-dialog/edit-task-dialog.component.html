@@ -22,7 +22,6 @@
 <!--    выпадающий список категорий-->
 <mat-form-field>
   <mat-label>Укажите категорию</mat-label>
-
   <mat-select [(ngModel)]="tmpCategory">
     <mat-option [value]="null">Без категории</mat-option>
     <mat-option *ngFor="let cat of categories" [value]="cat">
@@ -32,18 +31,28 @@
 
 </mat-form-field>
 
-<!-- выпадающий список -->
+<!-- выпадающий список приоритета -->
 <mat-form-field>
-  <mat-label>Укажите приоритет</mat-label>
-
-  <mat-select [(ngModel)]="tmpPriority">
-    <mat-option [value]="null">Без приоритета</mat-option>
-    <mat-option *ngFor="let cat of priority" [value]="cat">
-      {{cat.name}}
-    </mat-option>
-  </mat-select>
+    <mat-label>Укажите приоритет</mat-label>
+    <mat-select [(ngModel)]="tmpPriority">
+      <mat-option [value]="null">Без приоритета</mat-option>
+      <mat-option *ngFor="let cat of priority" [value]="cat">
+        {{cat.name}}
+      </mat-option>
+    </mat-select>
 
 </mat-form-field>
+
+<!-- выпадающий список даты -->
+<!--<mat-form-field>
+  <mat-label>Укажите дату</mat-label>
+  <mat-select [(ngModel)]="tmpDate">
+    <mat-option [value]="null">{{task.date}}</mat-option>
+    <mat-option *ngFor="let cat of task.date" [value]="cat">
+      {{cat.date}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>-->
 
 <!--  кнопки возможных действий-->
 <mat-dialog-actions>
@@ -53,6 +62,12 @@
     mat-raised-button>  <!-- если пустой текст - кнопка "Сохранить" будет недоступна -->
     Сохранить
   </button>
-  <button (click)="onCancel()" mat-raised-button>Отмена</button>
+  <button (click)="onCancel()" mat-raised-button>
+    Отмена
+  </button>
+
+  <button mat-raised-button color="warn" (click)="delete()">
+    Удалить задачу
+  </button>
 </mat-dialog-actions>
 
