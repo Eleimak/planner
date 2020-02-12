@@ -15,6 +15,8 @@ import { MatFormFieldModule,
          MatButtonModule,
          MatIconModule,
          MatOptionModule,
+         MatDatepickerModule,
+         MatNativeDateModule,
          MatSelectModule} from '@angular/material';
 import { EditTaskDialogComponent } from './dialog/edit-task-dialog/edit-task-dialog.component';
 import {FormsModule} from "@angular/forms";
@@ -41,7 +43,9 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
     MatButtonModule,
     MatIconModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [DataHandlerService],
   entryComponents: [EditTaskDialogComponent,
