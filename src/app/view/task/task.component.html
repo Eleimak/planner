@@ -33,7 +33,7 @@
         <th *matHeaderCellDef mat-header-cell>Статус</th>
         <td class="tableCompleted" *matCellDef="let task" [ngClass]="{'completed': task.completed}" mat-cell>
           <div class="form-check">
-            <label class="form-check-label">
+            <label class="form-check-label" readonly="readonly">
               <!-- 10898 строка цвет галочки background material-dashboard.css-->
               <input
                 (click)="toggleTaskCompleted(task)"

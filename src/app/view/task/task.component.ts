@@ -22,6 +22,9 @@ export class TaskComponent implements OnInit, AfterViewInit {
   @Output()
   updateTask = new EventEmitter<Task>();
 
+  @Output()
+  deleteTask = new EventEmitter<Task>();
+
   // поля для таблицы (те, что отображают данные из задачи - должны совпадать с названиями переменных класса)
   displayedColumns: string[] = ['id', 'name', 'category', 'priority', 'completed', 'date'];
   dataSource: MatTableDataSource<Task>; // контейнер - источник данных для таблицы
@@ -107,16 +110,36 @@ export class TaskComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator; // обновить компонент постраничности (кол-во записей, страниц)
   }
 
-  openEditTaskDialog(task: Task) {
+  // диалоговое редактирования для добавления задачи
+  private openEditTaskDialog(task: Task): void {
     // открытие диалогового окна
-    const dialogRef = this.dialog.open(EditTaskDialogComponent,
-      {data: [task, 'Редактирование задачи'], autoFocus: false});
+    const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+      data: [task, 'Редактирование задачи'],
+      autoFocus: false
+    });
     dialogRef.afterClosed().subscribe(result => {
       // обработка результатов
-      if(result as Task) { //если нажали ОК и есть результат
+      if (result === 'complete') {
+        task.completed = true; // ставим статус задачи как выполненная
+        this.updateTask.emit(task);
+      }
+      if (result === 'activate') {
+        task.completed = false; // возвращаем статус задачи как невыполненная
         this.updateTask.emit(task);
         return;
       }
-      });
+      if (result === 'delete') {
+        this.deleteTask.emit(task);
+        return;
+      }
+      if (result as Task) { // если нажали ОК и есть результат
+        this.updateTask.emit(task);
+        return;
+      }
+    });
+  }
+
+  onClickTask(task: Task) {
+    this.updateTask.emit(task);
   }
 }

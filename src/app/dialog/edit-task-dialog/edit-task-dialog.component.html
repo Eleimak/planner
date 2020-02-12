@@ -34,13 +34,11 @@
 <!-- выпадающий список приоритета -->
 <mat-form-field>
     <mat-label>Укажите приоритет</mat-label>
-    <mat-select [(ngModel)]="tmpPriority">
-      <mat-option [value]="null">Без приоритета</mat-option>
-      <mat-option *ngFor="let cat of priority" [value]="cat">
+    <mat-select [(ngModel)]="tmpPriority" [style.color]="tmpPriority.color">
+      <mat-option *ngFor="let cat of priority" [value]="cat" [style.color]="cat.color">
         {{cat.name}}
       </mat-option>
     </mat-select>
-
 </mat-form-field>
 
 <!-- выпадающий список даты -->

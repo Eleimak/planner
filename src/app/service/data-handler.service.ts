@@ -37,4 +37,8 @@ export class DataHandlerService {
   updateTask(task: Task): Observable<Task> {
     return this.taskDaoArrayImpl.update(task);
   }
+
+  deleteTask(id: number): Observable<Task> {
+    return this.taskDaoArrayImpl.delete(id);
+  }
 }

@@ -57,7 +57,6 @@ export class EditTaskDialogComponent implements OnInit {
 
   // нажали Удалить
   private delete() {
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '400px',
       data: {
@@ -66,7 +65,6 @@ export class EditTaskDialogComponent implements OnInit {
       },
       autoFocus: false
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.dialogRef.close('delete'); // нажали удалить
