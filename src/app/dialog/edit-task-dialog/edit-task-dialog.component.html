@@ -34,12 +34,46 @@
 <!-- выпадающий список приоритета -->
 <mat-form-field>
     <mat-label>Укажите приоритет</mat-label>
-    <mat-select [(ngModel)]="tmpPriority" [style.color]="tmpPriority.color">
+    <mat-select [(ngModel)]="tmpPriority">
       <mat-option *ngFor="let cat of priority" [value]="cat" [style.color]="cat.color">
         {{cat.name}}
       </mat-option>
     </mat-select>
 </mat-form-field>
+
+<!--  кнопки возможных действий-->
+<mat-dialog-actions>
+  <!--<div class="col-md-5 col-12" >-->
+  <button
+    (click)="onConfirm()" [disabled]="inputTitle.value.trim().length==0"
+    color="primary"
+    mat-raised-button>  <!-- если пустой текст - кнопка "Сохранить" будет недоступна -->
+    Сохранить
+  </button>
+  <button (click)="onCancel()" mat-raised-button>
+    Отмена
+  </button>
+  <!--</div>-->
+
+  <button
+    mat-raised-button color="accent"
+    *ngIf="!task.completed"
+    (click)="complete()">
+    Завершить
+  </button>
+
+  <button
+    mat-raised-button color="accent"
+    (click)="activate()"
+    *ngIf="task.completed">
+    Активировать
+  </button>
+
+
+  <button mat-raised-button color="warn" (click)="delete()">
+    Удалить
+  </button>
+</mat-dialog-actions>
 
 <!-- выпадающий список даты -->
 <!--<mat-form-field>
@@ -51,21 +85,3 @@
     </mat-option>
   </mat-select>
 </mat-form-field>-->
-
-<!--  кнопки возможных действий-->
-<mat-dialog-actions>
-  <button
-    (click)="onConfirm()" [disabled]="inputTitle.value.trim().length==0"
-    color="primary"
-    mat-raised-button>  <!-- если пустой текст - кнопка "Сохранить" будет недоступна -->
-    Сохранить
-  </button>
-  <button (click)="onCancel()" mat-raised-button>
-    Отмена
-  </button>
-
-  <button mat-raised-button color="warn" (click)="delete()">
-    Удалить задачу
-  </button>
-</mat-dialog-actions>
-
