@@ -28,7 +28,6 @@
       {{cat.name}}
     </mat-option>
   </mat-select>
-
 </mat-form-field>
 
 <!-- выпадающий список приоритета -->
@@ -45,7 +44,7 @@
 <mat-form-field>
   <input matInput placeholder="Укажите срок выполнения" #inputDate
     readonly="true" [matDatepicker]="picker" [(ngModel)]="tmpDate"
-    (click)="picker.open()">
+         (click)="picker.open()">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <!-- иконка календаря (для открытия календаря) -->
   <mat-datepicker #picker></mat-datepicker> <!-- компонент календаря (открывается по нажатию)-->
@@ -56,7 +55,6 @@
     <mat-icon>backspace</mat-icon>
   </button>
 </mat-form-field>
-
 
 <!--  кнопки возможных действий-->
 <mat-dialog-actions>
@@ -85,7 +83,6 @@
     *ngIf="task.completed">
     Активировать
   </button>
-
 
   <button mat-raised-button color="warn" (click)="delete()">
     Удалить

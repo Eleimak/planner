@@ -52,12 +52,41 @@
       <ng-container matColumnDef="date">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Дата</th>
         <td class="tableDate" *matCellDef="let task" [ngClass]="{'nodat e': task.date == null}"mat-cell>
-          {{task.date | date: "short"}}
+          <!--{{task.date | date: "short"}}-->
+          {{task.date | taskDate}}
         </td>
       </ng-container>
 
       <tr *matHeaderRowDef="displayedColumns; " mat-header-row></tr>
       <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+
+      <!--доступные действия над задачей-->
+      <ng-container matColumnDef="operations">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td class="col-operations" mat-cell *matCellDef="let task" [class.completed]="task.completed">
+          <button mat-icon-button (click)="openDeleteDialog(task)" class="delete-icon">
+            <mat-icon aria-hidden="false">delete</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openEditTaskDialog(task)" class="edit-icon">
+            <mat-icon aria-hidden="false">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!--
+      &lt;!&ndash;галочка для выполнения/активации задачи&ndash;&gt;
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td class="col-select text-right" mat-cell *matCellDef="let task">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? onToggleStatus(task) : null"
+            [checked]="task.completed">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      -->
 
     </table>
     <mat-paginator [pageSizeOptions]="pages" showFirstLastButtons></mat-paginator>
