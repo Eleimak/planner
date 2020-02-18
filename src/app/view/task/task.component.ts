@@ -51,33 +51,10 @@ export class TaskComponent implements OnInit, AfterViewInit {
     this.addTableObjects();
   }
 
-  /*
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-  */
-
   toggleTaskCompleted(task: Task) {
     task.completed = !task.completed;
     this.updateTask.emit(task);
   }
-
-  // в зависимости от статуса задачи - вернуть цвет названия
-  private getPriorityColor(task: Task) {
-    // цвет завершенной задачи
-    if (task.completed) {
-      return '#F8F9FA'; // TODO вынести цвета в константы (magic strings, magic numbers)
-    }
-    if (task.priority && task.priority.color) {
-      return task.priority.color;
-    }
-    return '#fff'; // TODO вынести цвета в константы (magic strings, magic numbers)
-  }
-
 
   private refreshTable() {
     if(!this.dataSource){

@@ -1,4 +1,4 @@
-.nav-link p {
+.nav-link {
   cursor: pointer;
 }
 
@@ -9,3 +9,34 @@
 .material-icons{
   background-color: purple;
 }
+
+.all_category{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/*
+.edit-category-icon-area {
+  width: 15%;
+  display: inline-block;
+  text-align: left;
+  font-size: 13px
+}
+
+.category-title {
+  width: 70%;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.all-category-title {
+  width: 85%;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.edit-category-icon {
+  color: #dadada;
+}
+*/

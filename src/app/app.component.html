@@ -1,5 +1,9 @@
 <div class="wrapper ">
- <app-category (tellToSubscribers)="onSelectCategory($event)" [categories]="categories"></app-category>
+ <app-category
+   (deleteCategory)="onDeleteCategory($event)"
+   (updateCategory)="onUpdateCategory($event)"
+   (tellToSubscribers)="onSelectCategory($event)"
+   [categories]="categories"></app-category>
   <div class="main-panel">
     <!-- Navbar -->
    <!-- <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
