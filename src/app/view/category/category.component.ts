@@ -14,6 +14,7 @@ export class CategoryComponent implements OnInit {
   private categories: Category[];
   @Output()
   tellToSubscribers = new EventEmitter<Category>();
+  @Input()
   selectedCategory: Category;
   indexMouseMove: number;
   // удалили категорию
@@ -26,7 +27,7 @@ export class CategoryComponent implements OnInit {
   constructor(private dialog: MatDialog) {}
 
   ngOnInit() {
-  //this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
+
   }
 
   showTasksByCategory(category: Category) {
@@ -39,14 +40,6 @@ export class CategoryComponent implements OnInit {
     this.tellToSubscribers.emit(this.selectedCategory);
   }
 
- /* getTasksByCategory(category: Category) {
-    this.selected = category;
-   //this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
-  }
-  showTasksByCategory(category: Category) {
-    this.selected = category;
-   // this.dataHandler.fetchTasksByCategory(category);
-  }*/
   private showEditIcon(index: number) {
     this.indexMouseMove = index;
   }

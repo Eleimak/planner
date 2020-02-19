@@ -4,6 +4,7 @@ import { DataHandlerService } from '../../service/data-handler.service';
 import {MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/material';
 import {EditTaskDialogComponent} from "../../dialog/edit-task-dialog/edit-task-dialog.component";
 import {ConfirmDialogComponent} from "../../dialog/confirm-dialog/confirm-dialog.component";
+import {Priority} from "../../model/priority";
 
 @Component({
   selector: 'app-task',
@@ -12,24 +13,35 @@ import {ConfirmDialogComponent} from "../../dialog/confirm-dialog/confirm-dialog
 })
 export class TaskComponent implements OnInit, AfterViewInit {
   private tasks: Task[];
+  private priorities: Priority[]; // список приоритетов (для фильтрации задач)
   private pages: number[]=[10, 5, 25, 50, 100];
+  // поиск
+  private searchTaskText: string; // текущее значение для поиска задач
+  private selectedStatusFilter: boolean = null;   // по-умолчанию будут показываться задачи по всем статусам (решенные и нерешенные)
+  private selectedPriorityFilter: Priority = null;   // по-умолчанию будут показываться задачи по всем приоритетам
 
   @Input('tasks')
   private set setTasks(tasks: Task[]) { // напрямую не присваиваем значения в переменную, только через @Input
     this.tasks = tasks;
     this.refreshTable();
   }
-
+  @Input('priorities')
+  set setPriorities(priorities: Priority[]) {
+    this.priorities = priorities;
+  }
   @Output()
   updateTask = new EventEmitter<Task>();
-
   @Output()
   deleteTask = new EventEmitter<Task>();
-
+  @Output()
+  filterByTitle = new EventEmitter<string>();
+  @Output()
+  filterByStatus = new EventEmitter<boolean>();
+  @Output()
+  filterByPriority = new EventEmitter<Priority>();
   // поля для таблицы (те, что отображают данные из задачи - должны совпадать с названиями переменных класса)
   displayedColumns: string[] = ['id', 'name', 'category', 'priority', 'completed', 'date', 'operations'];
   dataSource: MatTableDataSource<Task>; // контейнер - источник данных для таблицы
-
   // ссылки на компоненты таблицы
   @ViewChild(MatSort, {static: false})
   private sort: MatSort;
@@ -83,12 +95,10 @@ export class TaskComponent implements OnInit, AfterViewInit {
         }
       };
   }
-
   private addTableObjects() {
     this.dataSource.sort = this.sort; // компонент для сортировки данных (если необходимо)
     this.dataSource.paginator = this.paginator; // обновить компонент постраничности (кол-во записей, страниц)
   }
-
   // диалоговое редактирования для добавления задачи
   private openEditTaskDialog(task: Task): void {
     // открытие диалогового окна
@@ -139,5 +149,27 @@ export class TaskComponent implements OnInit, AfterViewInit {
   private onToggleStatus(task: Task) {
     task.completed = !task.completed;
     this.updateTask.emit(task);
+  }
+
+  // фильтрация по названию
+  private onFilterByTitle() {
+    this.filterByTitle.emit(this.searchTaskText);
+  }
+
+  // фильтрация по статусу
+  private onFilterByStatus(value: boolean) {
+    // на всякий случай проверяем изменилось ли значение (хотя сам гуишный компонент должен это делать)
+    if (value !== this.selectedStatusFilter) {
+      this.selectedStatusFilter = value;
+      this.filterByStatus.emit(this.selectedStatusFilter);
+    }
+  }
+
+  private onFilterByPriority(value: Priority) {
+    // на всякий случай проверяем изменилось ли значение (хотя сам UI компонент должен это делать)
+    if (value !== this.selectedPriorityFilter) {
+      this.selectedPriorityFilter = value;
+      this.filterByPriority.emit(this.selectedPriorityFilter);
+    }
   }
 }

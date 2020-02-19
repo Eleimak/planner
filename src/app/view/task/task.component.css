@@ -36,3 +36,7 @@ table {
   text-decoration: line-through;
   color: greenyellow;
 }
+
+.row{
+  margin: 7px 0 0 7px;
+}

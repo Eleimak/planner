@@ -25,7 +25,7 @@ export class DataHandlerService {
     return  this.categoryDaoArrayImpl.getAll();
   }
 
-  getAllPriorityes(): Observable<Priority[]>{
+  getAllPriorities(): Observable<Priority[]>{
     return this.priorityDAOArrayImpl.getAll();
   }
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {DataHandlerService} from "./service/data-handler.service";
 import {Category} from "./model/category";
 import {Task} from "./model/task";
+import {Priority} from "./model/priority";
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,18 @@ import {Task} from "./model/task";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'planner';
+  title = 'Planner';
 
-  tasks: Task[];
-  categories: Category[];
+  private tasks: Task[];
+  private categories: Category[];
+  private priorities: Priority[]; // все приоритеты
 
   private selectedCategory: Category = null;
+  // поиск
+  private searchTaskText = ''; // текущее значение для поиска задач
+  // фильтрация
+  private statusFilter: boolean;
+  private priorityFilter: Priority;
 
   constructor(
     private dataHandler: DataHandlerService // фасад для работы с данными
@@ -22,7 +29,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
-    this.onSelectCategory(null);
+    this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities);
   }
 
   private onSelectCategory(category: Category) {
@@ -78,5 +85,33 @@ export class AppComponent {
     this.dataHandler.updateCategory(category).subscribe(() => {
       this.onSelectCategory(this.selectedCategory);
     });
+  }
+
+  // поиск задач
+  private onSearchTasks(searchString: string) {
+    this.searchTaskText = searchString;
+    this.updateTasks();
+  }
+
+  // фильтрация задач по статусу (все, решенные, нерешенные)
+  private onFilterTasksByStatus(status: boolean) {
+    this.statusFilter = status;
+    this.updateTasks();
+  }
+
+  private updateTasks() {
+    this.dataHandler.searchTasks(
+      this.selectedCategory,
+      this.searchTaskText,
+      this.statusFilter,
+      this.priorityFilter,
+    ).subscribe((tasks: Task[]) => {
+      this.tasks = tasks;
+    });
+  }
+
+  onFilterByPriority(priority: Priority) {
+    this.priorityFilter = priority;
+    this.updateTasks();
   }
 }
