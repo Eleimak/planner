@@ -16,6 +16,12 @@
   justify-content: space-around;
 }
 
+.add_category{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 /*
 .edit-category-icon-area {
   width: 15%;

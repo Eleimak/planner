@@ -5,6 +5,7 @@ import {Category} from "../../model/category";
 import {DataHandlerService} from "../../service/data-handler.service";
 import {Priority} from "../../model/priority";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {OperType} from "../oper-type.enum";
 
 @Component({
   selector: 'app-edit-task-dialog',
@@ -22,10 +23,11 @@ export class EditTaskDialogComponent implements OnInit {
   private priority: Priority[];
   private tmpPriority: Priority;
   private tmpDate: Date;
+  private operType: OperType;
 
   constructor(
     private dialogRef: MatDialogRef<EditTaskDialogComponent>, // для возможности работы с текущим диалог. окном
-    @Inject(MAT_DIALOG_DATA) private data: [Task, string], // данные, которые передали в диалоговое окно
+    @Inject(MAT_DIALOG_DATA) private data: [Task, string, OperType], // данные, которые передали в диалоговое окно
     private dataHandler: DataHandlerService, // ссылка на сервис для работы с данными
     private dialog: MatDialog, // для открытия нового диалогового окна (из текущего) - например для подтверждения удаления
   ) { }
@@ -84,5 +86,12 @@ export class EditTaskDialogComponent implements OnInit {
   // делаем статус задачи "незавершенным" (активируем)
   private activate() {
     this.dialogRef.close('activate');
+  }
+  private canDelete(): boolean {
+    return this.operType == OperType.EDIT;
+  }
+
+  private canActivateDesactivate(): boolean {
+    return this.operType === OperType.EDIT;
   }
 }

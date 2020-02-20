@@ -5,6 +5,8 @@ import {MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/mat
 import {EditTaskDialogComponent} from "../../dialog/edit-task-dialog/edit-task-dialog.component";
 import {ConfirmDialogComponent} from "../../dialog/confirm-dialog/confirm-dialog.component";
 import {Priority} from "../../model/priority";
+import {Category} from "../../model/category";
+import {OperType} from "../../dialog/oper-type.enum";
 
 @Component({
   selector: 'app-task',
@@ -29,6 +31,11 @@ export class TaskComponent implements OnInit, AfterViewInit {
   set setPriorities(priorities: Priority[]) {
     this.priorities = priorities;
   }
+  @Input()
+  selectedCategory: Category;
+
+  @Output()
+  selectCategory = new EventEmitter<Category>(); // нажали на категорию из списка задач
   @Output()
   updateTask = new EventEmitter<Task>();
   @Output()
@@ -39,6 +46,9 @@ export class TaskComponent implements OnInit, AfterViewInit {
   filterByStatus = new EventEmitter<boolean>();
   @Output()
   filterByPriority = new EventEmitter<Priority>();
+  @Output()
+  addTask = new EventEmitter<Task>();
+
   // поля для таблицы (те, что отображают данные из задачи - должны совпадать с названиями переменных класса)
   displayedColumns: string[] = ['id', 'name', 'category', 'priority', 'completed', 'date', 'operations'];
   dataSource: MatTableDataSource<Task>; // контейнер - источник данных для таблицы
@@ -103,7 +113,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
   private openEditTaskDialog(task: Task): void {
     // открытие диалогового окна
     const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-      data: [task, 'Редактирование задачи'],
+      data: [task, 'Редактирование задачи', OperType.ADD],
       autoFocus: false
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -165,11 +175,24 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // фильтрация по приоритету
   private onFilterByPriority(value: Priority) {
     // на всякий случай проверяем изменилось ли значение (хотя сам UI компонент должен это делать)
     if (value !== this.selectedPriorityFilter) {
       this.selectedPriorityFilter = value;
       this.filterByPriority.emit(this.selectedPriorityFilter);
     }
+  }
+
+  // диалоговое окно для добавления задачи
+  private openAddTaskDialog() {
+    // то же самое, что и при редактировании, но только передаем пустой объект Task
+    const task = new Task(null, '', false, null, this.selectedCategory);
+    const dialogRef = this.dialog.open(EditTaskDialogComponent, {data: [task, 'Добавление задачи', OperType.ADD]});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { // если нажали ОК и есть результат
+        this.addTask.emit(task);
+      }
+    });
   }
 }

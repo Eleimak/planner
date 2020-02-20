@@ -13,12 +13,14 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <!-- виртуальная категория 'Все'-->
-      <li class="nav-item category" (click)="showTasksByCategory(null)" [class.active]="selectedCategory === null">
-        <a class="nav-link pointer">
-          <!--          название категории-->
-          <span class="all-category-title" >Все</span>
-        </a>
-      </li>
+      <div class="add_category">
+        <!--    иконка добавления новой категории -->
+        <span class="add-icon-area">
+          <button mat-icon-button  class="add-icon" (click)="openAddDialog()">
+      <mat-icon >add</mat-icon>
+        </button>
+    </span>
+      </div>
       <!-- разделитель-->
       <div class="line"></div>
 
@@ -42,4 +44,5 @@
       </li>
     </ul>
   </div>
+
 </div>

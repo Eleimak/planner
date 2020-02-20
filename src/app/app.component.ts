@@ -17,6 +17,7 @@ export class AppComponent {
   private priorities: Priority[]; // все приоритеты
 
   private selectedCategory: Category = null;
+
   // поиск
   private searchTaskText = ''; // текущее значение для поиска задач
   // фильтрация
@@ -113,5 +114,12 @@ export class AppComponent {
   onFilterByPriority(priority: Priority) {
     this.priorityFilter = priority;
     this.updateTasks();
+  }
+
+  //
+  private onAddTask(task: Task) {
+    this.dataHandler.addTask(task).subscribe(result => {
+      this.updateTasks();
+    });
   }
 }

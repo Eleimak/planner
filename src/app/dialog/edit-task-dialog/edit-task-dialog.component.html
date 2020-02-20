@@ -71,20 +71,30 @@
   <!--</div>-->
 
   <button
-    mat-raised-button color="accent"
-    *ngIf="!task.completed"
-    (click)="complete()">
+    (click)="complete()" *ngIf="!task.completed && canActivateDesactivate()"
+    class="green"
+    mat-button
+
+  >
     Завершить
   </button>
 
   <button
-    mat-raised-button color="accent"
-    (click)="activate()"
-    *ngIf="task.completed">
+    (click)="activate()" *ngIf="task.completed && canActivateDesactivate()"
+    class="green"
+    mat-button>
+
     Активировать
+
   </button>
 
-  <button mat-raised-button color="warn" (click)="delete()">
+  <button
+    *ngIf="canDelete()"
+
+    (click)="delete()"
+
+    class="red"
+    mat-button>
     Удалить
   </button>
 </mat-dialog-actions>

@@ -29,8 +29,10 @@
       Сохранить
     </button>
     <button mat-raised-button (click)="onCancel()">Отмена</button>
-    <button mat-raised-button (click)="delete()" color="warn">
-      Удалить
+    <button *ngIf="canDelete()" (click)="delete()" color="warn" mat-raised-button>
+        Удалить
     </button>
+
+
   </div>
 </mat-dialog-actions>
