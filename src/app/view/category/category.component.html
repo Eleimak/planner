@@ -11,18 +11,35 @@
     </a>
   </div>
   <div class="sidebar-wrapper">
-    <ul class="nav">
-      <!-- виртуальная категория 'Все'-->
+    <div class="straightLine">
+      <!--      поиск категорий -->
+      <div class="search-category-area">
+        <mat-form-field class="example-full-width">
+          <input #inputSearchCategory
+                 (keydown.escape)="searchCategoryTitle = ''; search()"
+                 (keyup)="search()" [(ngModel)]="searchCategoryTitle"
+                 matInput maxlength="256" placeholder="Поиск категорий"/>
+          <button (click)="searchCategoryTitle = ''; search()"
+                  *ngIf="inputSearchCategory.value.trim().length > 0" aria-label="Clear"
+                  mat-button mat-icon-button matSuffix>
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
       <div class="add_category">
         <!--    иконка добавления новой категории -->
         <span class="add-icon-area">
-          <button mat-icon-button  class="add-icon" (click)="openAddDialog()">
-      <mat-icon >add</mat-icon>
-        </button>
-    </span>
+            <button mat-icon-button  class="add-icon" (click)="openAddDialog()">
+              <mat-icon >add</mat-icon>
+            </button>
+          </span>
       </div>
-      <!-- разделитель-->
-      <div class="line"></div>
+    </div>
+    <div *ngIf="categories.length === 0; else elseBlock" ><p>Ничего не найдено</p></div>
+    <ng-template #elseBlock>
+    <ul class="nav">
+<!--      &lt;!&ndash; разделитель&ndash;&gt;
+      <div class="line"></div>-->
 
       <!-- 14600 строка цвет :hover background-color material-dashboard.css-->
       <li class="nav-item" *ngFor="let category of categories; let index = index"  (click)="showTasksByCategory(category)"
@@ -43,6 +60,7 @@
         </a>
       </li>
     </ul>
+    </ng-template>
   </div>
 
 </div>

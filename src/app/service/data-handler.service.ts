@@ -53,4 +53,12 @@ export class DataHandlerService {
   addTask(task: Task): Observable<Task> {
     return this.taskDaoArrayImpl.add(task);
   }
+
+  addCategory(title:string):Observable<Category>{
+    return this.categoryDaoArrayImpl.add(new Category(null, title));
+  }
+
+  searchCategories(title: string): Observable<Category[]> {
+    return this.categoryDaoArrayImpl.search(title);
+  }
 }

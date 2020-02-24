@@ -17,7 +17,8 @@ export class CategoryComponent implements OnInit {
   tellToSubscribers = new EventEmitter<Category>();
   @Input()
   selectedCategory: Category;
-  indexMouseMove: number;
+  // для отображения иконки редактирования при наведении на категорию
+  private indexMouseMove: number;
   // удалили категорию
   @Output()
   deleteCategory = new EventEmitter<Category>();
@@ -27,9 +28,15 @@ export class CategoryComponent implements OnInit {
   // добавили категорию
   @Output()
   addCategory = new EventEmitter<string>(); // передаем только название новой категории
+  // поиск категории
+  @Output()
+  searchCategory = new EventEmitter<string>(); // передаем строку для поиска
 
+  searchCategoryTitle: string;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {
+    this.showTasksByCategory(null);
+  }
 
   ngOnInit() {
 
@@ -76,5 +83,13 @@ export class CategoryComponent implements OnInit {
         this.addCategory.emit(result as string); // вызываем внешний обработчик
       }
     });
+  }
+
+  // поиск категории
+  private search() {
+    if (this.searchCategoryTitle == null ) {
+      return;
+    }
+    this.searchCategory.emit(this.searchCategoryTitle);
   }
 }

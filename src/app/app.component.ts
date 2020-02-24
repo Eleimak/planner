@@ -23,6 +23,7 @@ export class AppComponent {
   // фильтрация
   private statusFilter: boolean;
   private priorityFilter: Priority;
+  private searchCategoryText: string;
 
   constructor(
     private dataHandler: DataHandlerService // фасад для работы с данными
@@ -120,6 +121,22 @@ export class AppComponent {
   private onAddTask(task: Task) {
     this.dataHandler.addTask(task).subscribe(result => {
       this.updateTasks();
+    });
+  }
+
+  // добавление категории
+  private onAddCategory(title: string) {
+    this.dataHandler.addCategory(title).subscribe(() => this.updateCategories());
+  }
+  private updateCategories() {
+    this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
+  }
+
+  // поиск категории
+  private onSearchCategory(title: string) {
+    this.searchCategoryText = title;
+    this.dataHandler.searchCategories(title).subscribe(categories => {
+      this.categories = categories;
     });
   }
 }

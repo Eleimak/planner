@@ -5,7 +5,17 @@ import {TestData} from '../../data/test-data';
 
 export class CategoryDAOArrayImpl implements CategoryDAO {
   add(T): Observable<Category> {
-    return undefined;
+    // если id пустой - генерируем его
+    if (T.id === null || T.id === 0) {
+      T.id = this.getLastIdCategory() + 1;
+    }
+    TestData.categories.push(T);
+    return of(T);
+  }
+
+  // находит последний id (чтобы потом вставить новую запись с id, увеличенным на 1) - в реальной БД это происходит автоматически
+  private getLastIdCategory(): number {
+    return Math.max.apply(Math, TestData.categories.map(c => c.id));
   }
 
   delete(id: number): Observable<Category> {
@@ -29,8 +39,10 @@ export class CategoryDAOArrayImpl implements CategoryDAO {
     return of(TestData.categories);
   }
 
-  search(title: string): Observable<Category> {
-    return undefined;
+  search(title: string): Observable<Category[]> {
+    return of(TestData.categories.filter(
+      cat => cat.name.toUpperCase().includes(title.toUpperCase()))
+      .sort((c1, c2) => c1.name.localeCompare(c2.name)));
   }
 
   update(T): Observable<Category> {
