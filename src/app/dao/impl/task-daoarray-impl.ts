@@ -43,20 +43,24 @@ export class TaskDAOArrayImpl implements TaskDAO {
     return of(TestData.tasks.filter( task => task.category === category));
   }
 
+  // кол-во завершенных задач в заданной категории (если category === null, то для всех категорий)
   getCompletedCountInCategory(category: Category): Observable<number> {
-    return undefined;
+    return of(this.searchTasks(category, null, true, null).length);
   }
 
+  // кол-во всех задач в общем
   getTotalCount(): Observable<number> {
-    return undefined;
+    return of(TestData.tasks.length);
   }
 
+  // кол-во всех задач в заданной категории (если category === null, то для всех категорий)
   getTotalCountInCategory(category: Category): Observable<number> {
-    return undefined;
+    return of(this.searchTasks(category, null, null, null).length);
   }
 
+  // кол-во незавершенных задач в заданной категории (если category === null, то для всех категорий)
   getUncompletedCountInCategory(category: Category): Observable<number> {
-    return undefined;
+    return of(this.searchTasks(category, null, false, null).length);
   }
 
   // поиск задач по параметрам

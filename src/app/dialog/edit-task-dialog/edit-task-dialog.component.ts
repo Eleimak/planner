@@ -23,7 +23,6 @@ export class EditTaskDialogComponent implements OnInit {
   private priority: Priority[];
   private tmpPriority: Priority;
   private tmpDate: Date;
-  private operType: OperType;
 
   constructor(
     private dialogRef: MatDialogRef<EditTaskDialogComponent>, // для возможности работы с текущим диалог. окном
@@ -86,12 +85,5 @@ export class EditTaskDialogComponent implements OnInit {
   // делаем статус задачи "незавершенным" (активируем)
   private activate() {
     this.dialogRef.close('activate');
-  }
-  private canDelete(): boolean {
-    return this.operType == OperType.EDIT;
-  }
-
-  private canActivateDesactivate(): boolean {
-    return this.operType === OperType.EDIT;
   }
 }

@@ -3,6 +3,7 @@ import {DataHandlerService} from "./service/data-handler.service";
 import {Category} from "./model/category";
 import {Task} from "./model/task";
 import {Priority} from "./model/priority";
+import {zip} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,12 @@ export class AppComponent {
   private priorityFilter: Priority;
   private searchCategoryText: string;
 
+  // статистика
+  private totalTasksCountInCategory: number;
+  private completedCountInCategory: number;
+  private uncompletedCountInCategory: number;
+  private uncompletedTotalTasksCount: number;
+
   constructor(
     private dataHandler: DataHandlerService // фасад для работы с данными
   ) {}
@@ -32,8 +39,10 @@ export class AppComponent {
   ngOnInit(): void {
     this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
     this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities);
+    this.onSelectCategory(null); // показать все задачи
   }
 
+  // изменение категории
   private onSelectCategory(category: Category) {
     this.selectedCategory = category;
     this.dataHandler.searchTasks(
@@ -44,9 +53,10 @@ export class AppComponent {
     ).subscribe(tasks => {
       this.tasks = tasks;
     });
-
+    this.updateTasksAndStat();
   }
 
+  // обновление задачи
   openEditTaskDialog(task: Task) {
     this.dataHandler.updateTask(task).subscribe(() => {
       this.dataHandler.searchTasks(
@@ -58,6 +68,7 @@ export class AppComponent {
         this.tasks = tasks;
       });
     });
+    this.updateTasksAndStat();
   }
 
   // удаление задачи
@@ -117,7 +128,7 @@ export class AppComponent {
     this.updateTasks();
   }
 
-  //
+  // добавление задачи
   private onAddTask(task: Task) {
     this.dataHandler.addTask(task).subscribe(result => {
       this.updateTasks();
@@ -138,5 +149,30 @@ export class AppComponent {
     this.dataHandler.searchCategories(title).subscribe(categories => {
       this.categories = categories;
     });
+  }
+
+  // показывает задачи с применением всех текущий условий (категория, поиск, фильтры и пр.)
+  private updateTasksAndStat() {
+
+    this.updateTasks(); // обновить список задач
+
+    // обновить переменные для статистики
+    this.updateStat();
+
+  }
+
+  // обновить статистику
+  private updateStat() {
+    zip(
+      this.dataHandler.getTotalCountInCategory(this.selectedCategory),
+      this.dataHandler.getCompletedCountInCategory(this.selectedCategory),
+      this.dataHandler.getUncompletedCountInCategory(this.selectedCategory),
+      this.dataHandler.getUncompletedTotalCount())
+      .subscribe(array => {
+        this.totalTasksCountInCategory = array[0];
+        this.completedCountInCategory = array[1];
+        this.uncompletedCountInCategory = array[2];
+        this.uncompletedTotalTasksCount = array[3]; // нужно для категории Все
+      });
   }
 }
