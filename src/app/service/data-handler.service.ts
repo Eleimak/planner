@@ -76,4 +76,16 @@ export class DataHandlerService {
     return this.taskDaoArrayImpl.getTotalCountInCategory(category);
   }
 
+
+  addPriority(priority: Priority): Observable<Priority> {
+    return this.priorityDAOArrayImpl.add(priority);
+  }
+
+  deletePriority(id: number): Observable<Priority> {
+    return this.priorityDAOArrayImpl.delete(id);
+  }
+
+  updatePriority(priority: Priority): Observable<Priority> {
+    return this.priorityDAOArrayImpl.update(priority);
+  }
 }

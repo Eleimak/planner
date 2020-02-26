@@ -24,5 +24,4 @@ export class HeaderComponent implements OnInit {
       });
     // никаких действий не требуется после закрытия окна
   }
-
 }
