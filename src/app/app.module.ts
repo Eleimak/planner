@@ -25,6 +25,8 @@ import { AboutDialogComponent } from './dialog/about-dialog/about-dialog.compone
 import { HeaderComponent } from './view/header/header.component';
 import { StatComponent } from './view/stat/stat.component';
 import { StatCardComponent } from './view/stat/stat-card/stat-card.component';
+import {ColorPickerModule} from "ngx-color-picker";
+import { SettingsDialogComponent } from './dialog/settings-dialog/settings-dialog.component';
 registerLocaleData(localeRu);
 
 @NgModule({
@@ -41,6 +43,7 @@ registerLocaleData(localeRu);
     HeaderComponent,
     StatComponent,
     StatCardComponent,
+    SettingsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,14 +61,15 @@ registerLocaleData(localeRu);
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ColorPickerModule
   ],
   providers: [DataHandlerService],
   entryComponents: [
     EditTaskDialogComponent,
     ConfirmDialogComponent,
     EditCategoryDialogComponent,
-    AboutDialogComponent
+    AboutDialogComponent,
   ],
   bootstrap: [AppComponent]
 })
