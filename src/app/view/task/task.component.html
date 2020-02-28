@@ -77,7 +77,7 @@
     <table [dataSource]="dataSource" mat-table matSort>
       <ng-container matColumnDef="id">
         <th *matHeaderCellDef mat-header-cell>ID</th>
-        <td class="tableID" *matCellDef="let index = index;" mat-cell>{{index + 1}}</td>
+        <td class="tableID pointer" *matCellDef="let index = index;" mat-cell>{{index + 1}}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
@@ -87,12 +87,12 @@
 
       <ng-container matColumnDef="category">
         <th *matHeaderCellDef mat-header-cell mat-sort-header> Категория</th>
-        <td class="tableCategory" *matCellDef="let task" mat-cell>{{task.category.name}}</td>
+        <td class="tableCategory pointer" *matCellDef="let task" (click)="openEditTaskDialog(task)" mat-cell>{{task.category.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="priority">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Приоритет</th>
-        <td class="tablePriority" *matCellDef="let task"
+        <td class="tablePriority pointer" (click)="openEditTaskDialog(task)" *matCellDef="let task"
             [ngClass]="{'nopriority': task.priority == null}" [style.color]="task.priority.color" mat-cell>
           {{task.priority ? task.priority.name : "Без приоритета"}}
         </td>
@@ -100,7 +100,7 @@
 
       <ng-container matColumnDef="completed">
         <th *matHeaderCellDef mat-header-cell>Статус</th>
-        <td class="tableCompleted" *matCellDef="let task" [ngClass]="{'completed': task.completed}" mat-cell>
+        <td class="tableCompleted pointer"  *matCellDef="let task" [ngClass]="{'completed': task.completed}" mat-cell>
           <div class="form-check">
             <label class="form-check-label" readonly="readonly">
               <!-- 10898 строка цвет галочки background material-dashboard.css-->
@@ -120,7 +120,7 @@
 
       <ng-container matColumnDef="date">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Дата</th>
-        <td class="tableDate" *matCellDef="let task" [ngClass]="{'nodat e': task.date == null}" mat-cell>
+        <td class="tableDate pointer" *matCellDef="let task" (click)="openEditTaskDialog(task)" [ngClass]="{'nodat e': task.date == null}" mat-cell>
           {{task.date | taskDate}}
         </td>
       </ng-container>
