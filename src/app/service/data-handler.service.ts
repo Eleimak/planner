@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Category} from '../model/category';
 import {Task} from '../model/task';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {TaskDAOArrayImpl} from '../dao/impl/task-daoarray-impl';
 import {CategoryDAOArrayImpl} from '../dao/impl/category-daoarray-impl';
 import {Priority} from "../model/priority";
 import {PriorityDAOArrayImpl} from "../dao/impl/priority-daoarray-impl";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class DataHandlerService {
@@ -15,18 +16,34 @@ export class DataHandlerService {
   private priorityDAOArrayImpl = new PriorityDAOArrayImpl();
 
 
-  constructor() {
+  constructor(private http: HttpClient) { }
+
+  getAllPriorities(): Observable<any>{
+    //return this.priorityDAOArrayImpl.getAll();
+    return this.http.get('http://localhost:8080/api/priority/list');
   }
+
+  addPriority(priority: Priority): Observable<any> {
+    //return this.priorityDAOArrayImpl.add(priority);
+    return this.http.post('http://localhost:8080/api/priority/create', priority);
+  }
+
+  deletePriority(id: number): Observable<any> {
+    //return this.priorityDAOArrayImpl.delete(id);
+    return this.http.get('http://localhost:8080/api/priority/delete/' + id);
+  }
+
+  updatePriority(priority: Priority): Observable<any> {
+    //return this.priorityDAOArrayImpl.update(priority);
+    return this.http.post('http://localhost:8080/api/priority/update', priority);
+  }
+
   getAllTasks(): Observable<Task[]> {
     return this.taskDaoArrayImpl.getAll();
   }
 
   getAllCategories(): Observable<Category[]>{
     return  this.categoryDaoArrayImpl.getAll();
-  }
-
-  getAllPriorities(): Observable<Priority[]>{
-    return this.priorityDAOArrayImpl.getAll();
   }
 
   // поиск задач по параметрам
@@ -74,18 +91,5 @@ export class DataHandlerService {
   }
   getTotalCountInCategory(category: Category): Observable<number> {
     return this.taskDaoArrayImpl.getTotalCountInCategory(category);
-  }
-
-
-  addPriority(priority: Priority): Observable<Priority> {
-    return this.priorityDAOArrayImpl.add(priority);
-  }
-
-  deletePriority(id: number): Observable<Priority> {
-    return this.priorityDAOArrayImpl.delete(id);
-  }
-
-  updatePriority(priority: Priority): Observable<Priority> {
-    return this.priorityDAOArrayImpl.update(priority);
   }
 }

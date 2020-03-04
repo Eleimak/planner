@@ -23,6 +23,10 @@ export class SettingsDialogComponent implements OnInit {
 
   ngOnInit() {
     // получаем все значения, чтобы отобразить настроку цветов
+    this.getAllPriorities();
+  }
+
+  private getAllPriorities(){
     this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities);
   }
 

@@ -12,7 +12,7 @@ import {EditPriorityDialogComponent} from "../../../dialog/edit-priority-dialog/
   styleUrls: ['./priorities.component.css']
 })
 export class PrioritiesComponent implements OnInit {
-  static defaultColor = '#fff';
+  static defaultColor = '#000';
   @Input()
   private priorities: [Priority];
 
@@ -27,13 +27,12 @@ export class PrioritiesComponent implements OnInit {
   deletePriority = new EventEmitter<Priority>();
 
   constructor( private dialog: MatDialog // для открытия нового диалогового окна (из текущего))
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
   }
-  delete(priority: Priority): void {
 
+  delete(priority: Priority): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '500px',
       data: {
@@ -42,13 +41,13 @@ export class PrioritiesComponent implements OnInit {
       },
       autoFocus: false
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deletePriority.emit(priority);
       }
     });
   }
+
   private onAddPriority(): void {
     const dialogRef = this.dialog.open(EditCategoryDialogComponent, {
       data: ['', 'Добавление приоритета', OperType.ADD],
@@ -61,11 +60,10 @@ export class PrioritiesComponent implements OnInit {
       }
     });
   }
-  private onEditPriority(priority: Priority): void {
 
+  private onEditPriority(priority: Priority): void {
     const dialogRef = this.dialog.open(EditPriorityDialogComponent, {data: [priority.name, 'Редактирование приоритета', OperType.EDIT]});
     dialogRef.afterClosed().subscribe(result => {
-
       if (result === 'delete') {
         this.deletePriority.emit(priority);
         return;

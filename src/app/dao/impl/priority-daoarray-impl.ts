@@ -3,13 +3,16 @@ import {Observable, of} from 'rxjs';
 import {Priority} from '../../model/priority';
 import {PriorityDAO} from '../interface/priority-dao';
 import {TestData} from "../../data/test-data";
+import {HttpClient} from "@angular/common/http";
 
 export class PriorityDAOArrayImpl implements PriorityDAO{
+
   get(id: number): Observable<Priority> {
     return of(TestData.priorities.find(priority => priority.id === id));
   }
 
   getAll(): Observable<Priority[]> {
+    //return of( this.http.get('http://localhost:8080/api/priority/list'));
     return of(TestData.priorities);
   }
 

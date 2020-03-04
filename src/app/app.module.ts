@@ -29,6 +29,7 @@ import {ColorPickerModule} from "ngx-color-picker";
 import { SettingsDialogComponent } from './dialog/settings-dialog/settings-dialog.component';
 import { PrioritiesComponent } from './view/header/priorities/priorities.component';
 import { EditPriorityDialogComponent } from './dialog/edit-priority-dialog/edit-priority-dialog.component';
+import { HttpClientModule} from "@angular/common/http";
 registerLocaleData(localeRu);
 
 @NgModule({
@@ -66,7 +67,8 @@ registerLocaleData(localeRu);
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    ColorPickerModule
+    ColorPickerModule,
+    HttpClientModule
   ],
   providers: [DataHandlerService],
   entryComponents: [
