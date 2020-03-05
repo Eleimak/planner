@@ -65,7 +65,7 @@
       </li>-->
       <!-- 14600 строка цвет :hover background-color material-dashboard.css-->
       <li class="nav-item" *ngFor="let mapValue of selectedCategoryMap | keyvalue; let index = index"
-          (click)="showTasksByCategory(category)"
+          (click)="showTasksByCategory(mapValue.key)"
         [class.active]="mapValue.key === selectedCategory" (mouseleave)="showEditIcon(null)"
           (mouseenter)="showEditIcon(index)">
         <a class="nav-link">
@@ -76,7 +76,8 @@
             <mat-icon
               *ngIf="indexMouseMove === index"
               (click)="$event.stopPropagation(); openEditDialog(mapValue.key)"
-              class="edit-category-icon">create
+              class="edit-category-icon">
+              create
             </mat-icon>
           </i>
            <!-- сколько невыполненных задач-->

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Priority} from "../../model/priority";
 import {MatDialogRef} from "@angular/material/dialog";
-import {DataHandlerService} from "../../service/data-handler.service";
+import {PriorityService} from "../../service/priority.service";
 
 @Component({
   selector: 'app-settings-dialog',
@@ -17,7 +17,7 @@ export class SettingsDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<SettingsDialogComponent>, // для возможности работы с текущим диалог. окном
-    private dataHandler: DataHandlerService // ссылка на сервис для работы с данными
+    private priorityService: PriorityService // ссылка на сервис для работы с данными
   ) {
   }
 
@@ -27,7 +27,7 @@ export class SettingsDialogComponent implements OnInit {
   }
 
   private getAllPriorities(){
-    this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities);
+    this.priorityService.getAllPriorities().subscribe(priorities => this.priorities = priorities);
   }
 
   // нажали Закрыть
@@ -35,20 +35,20 @@ export class SettingsDialogComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  // т.к. мы меняем значения в массивах, то изменения сразу отражаются на списке задач (не требуется доп. обновления)
+   // т.к. мы меняем значения в массивах, то изменения сразу отражаются на списке задач (не требуется доп. обновления)
 
   // добавили приоритет
   private onAddPriority(priority: Priority): void {
-    this.dataHandler.addPriority(priority).subscribe();
+    this.priorityService.addPriority(priority).subscribe();
   }
 
   // удалили приоритет
   private onDeletePriority(priority: Priority): void {
-    this.dataHandler.deletePriority(priority.id).subscribe();
+    this.priorityService.deletePriority(priority.id).subscribe();
   }
 
   // обновили приоритет
   private onUpdatePriority(priority: Priority): void {
-    this.dataHandler.updatePriority(priority).subscribe();
+    this.priorityService.updatePriority(priority).subscribe();
   }
 }

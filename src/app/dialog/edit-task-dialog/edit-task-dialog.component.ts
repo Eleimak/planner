@@ -6,6 +6,8 @@ import {DataHandlerService} from "../../service/data-handler.service";
 import {Priority} from "../../model/priority";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {OperType} from "../oper-type.enum";
+import {PriorityService} from "../../service/priority.service";
+import {CategoryService} from "../../service/category.service";
 
 @Component({
   selector: 'app-edit-task-dialog',
@@ -29,6 +31,8 @@ export class EditTaskDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: [Task, string, OperType], // данные, которые передали в диалоговое окно
     private dataHandler: DataHandlerService, // ссылка на сервис для работы с данными
     private dialog: MatDialog, // для открытия нового диалогового окна (из текущего) - например для подтверждения удаления
+    private priorityService: PriorityService,
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit() {
@@ -36,9 +40,9 @@ export class EditTaskDialogComponent implements OnInit {
     this.dialogTitle = this.data[1]; // текст для диалогового окна
     this.tmpTitle = this.task.name;
     this.tmpCategory = this.task.category;
-    this.dataHandler.getAllCategories().subscribe(items => this.categories = items);
+    this.categoryService.getAllCategories().subscribe(items => this.categories = items);
     this.tmpPriority = this.task.priority;
-    this.dataHandler.getAllPriorities().subscribe(items => this.priority = items);
+    this.priorityService.getAllPriorities().subscribe(items => this.priority = items);
     this.tmpDate = this.task.date;
   }
 
